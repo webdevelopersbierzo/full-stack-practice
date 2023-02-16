@@ -1,9 +1,13 @@
 package com.webdevelopersbierzo.ebook.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,6 +18,7 @@ public class Owner {
     @Column(name="lastname")
     private String lastName;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy="owner")
     private List<Car> cars;
     public Owner() {
